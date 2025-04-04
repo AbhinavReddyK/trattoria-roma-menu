@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trattoria Roma - Menu</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Open+Sans&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h1>Trattoria Roma</h1>
+    <p>Authentic Italian Cuisine Since 1992</p>
+  </header>
+
+  <main>
+    <div class="slider">
+      <img id="dish-img" src="" alt="Dish Image" class="slide-in">
+      <h2 id="dish-name"></h2>
+      <p id="dish-desc"></p>
+      <ul id="dish-ingredients"></ul>
+      <p id="dish-price"></p>
+
+      <div class="nav-buttons">
+        <button onclick="prevDish()">⬅ Previous</button>
+        <button onclick="nextDish()">Next ➡</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>📍 Florence, Italy | 📞 +39 055 123 456 | 🍷 @trattoriaroma</p>
+  </footer>
+
+  <script>
+    const dishes = [
+      {
+        name: "Margherita Pizza",
+        desc: "A classic Neapolitan delight with fresh mozzarella, tomatoes, and basil.",
+        img: "https://cdn.pixabay.com/photo/2017/12/09/08/18/pizza-3007395_1280.png",
+        ingredients: ["Wheat Dough", "Tomato Sauce", "Fresh Mozzarella", "Fresh Basil", "Olive Oil"],
+        price: "$12.00"
+      },
+      {
+        name: "Spaghetti Carbonara",
+        desc: "Traditional Roman pasta with eggs, cheese, pancetta, and pepper.",
+        img: "https://cdn.pixabay.com/photo/2022/06/15/19/12/pasta-7263567_1280.png",
+        ingredients: ["Spaghetti", "Eggs", "Pecorino Romano", "Pancetta", "Black Pepper"],
+        price: "$14.00"
+      },
+      {
+        name: "Lasagna Bolognese",
+        desc: "Layered pasta with rich meat sauce and creamy béchamel.",
+        img: "https://cdn.pixabay.com/photo/2023/01/29/13/08/lasagna-7752471_1280.png",
+        ingredients: ["Pasta Sheets", "Bolognese Sauce", "Béchamel", "Parmesan Cheese"],
+        price: "$15.00"
+      },
+      {
+        name: "Caprese Salad",
+        desc: "Fresh mozzarella, tomatoes, and basil drizzled with olive oil.",
+        img: "https://cdn.pixabay.com/photo/2020/01/03/13/32/caprese-4737544_1280.png",
+        ingredients: ["Tomatoes", "Fresh Mozzarella", "Basil", "Olive Oil", "Balsamic Glaze"],
+        price: "$10.00"
+      },
+      {
+        name: "Risotto ai Funghi",
+        desc: "Creamy risotto with porcini mushrooms and white wine.",
+        img: "https://cdn.pixabay.com/photo/2018/02/14/10/16/mushroom-risotto-3151537_1280.png",
+        ingredients: ["Arborio Rice", "Porcini Mushrooms", "Parmesan", "White Wine", "Butter"],
+        price: "$13.50"
+      },
+      {
+        name: "Gnocchi al Pesto",
+        desc: "Soft potato gnocchi in a fragrant basil pesto sauce.",
+        img: "https://cdn.pixabay.com/photo/2019/11/10/22/40/gnocchi-4616229_1280.png",
+        ingredients: ["Potato Gnocchi", "Basil", "Pine Nuts", "Garlic", "Parmesan"],
+        price: "$12.50"
+      },
+      {
+        name: "Fettuccine Alfredo",
+        desc: "Creamy fettuccine pasta with parmesan and butter.",
+        img: "https://cdn.pixabay.com/photo/2021/12/13/16/37/fettuccine-6868532_1280.png",
+        ingredients: ["Fettuccine", "Butter", "Parmesan", "Cream", "Salt"],
+        price: "$13.00"
+      },
+      {
+        name: "Bruschetta",
+        desc: "Grilled bread topped with fresh tomatoes, garlic, and olive oil.",
+        img: "https://cdn.pixabay.com/photo/2017/02/01/10/47/bruschetta-2027177_1280.png",
+        ingredients: ["Bread", "Tomatoes", "Garlic", "Basil", "Olive Oil"],
+        price: "$8.00"
+      },
+      {
+        name: "Tiramisu",
+        desc: "Classic Italian dessert with mascarpone, coffee, and cocoa.",
+        img: "https://cdn.pixabay.com/photo/2018/05/16/13/37/tiramisu-3402931_1280.png",
+        ingredients: ["Ladyfingers", "Mascarpone", "Coffee", "Cocoa Powder", "Sugar"],
+        price: "$7.00"
+      },
+      {
+        name: "Panna Cotta",
+        desc: "Creamy vanilla pudding topped with berry sauce.",
+        img: "https://cdn.pixabay.com/photo/2017/05/07/08/56/panna-cotta-2292352_1280.png",
+        ingredients: ["Cream", "Vanilla", "Sugar", "Gelatin", "Berry Sauce"],
+        price: "$6.50"
+      }
+    ];
+
+    let current = 0;
+
+    function updateDish() {
+      const dish = dishes[current];
+      document.getElementById("dish-img").src = dish.img;
+      document.getElementById("dish-name").textContent = dish.name;
+      document.getElementById("dish-desc").textContent = dish.desc;
+      document.getElementById("dish-price").textContent = `Price: ${dish.price}`;
+      const ingredientsList = document.getElementById("dish-ingredients");
+      ingredientsList.innerHTML = "";
+      dish.ingredients.forEach(ing => {
+        const li = document.createElement("li");
+        li.textContent = ing;
+        ingredientsList.appendChild(li);
+      });
+
+      document.getElementById("dish-img").classList.add("slide-in");
+    }
+
+    function nextDish() {
+      current = (current + 1) % dishes.length;
+      updateDish();
+    }
+
+    function prevDish() {
+      current = (current - 1 + dishes.length) % dishes.length;
+      updateDish();
+    }
+
+    updateDish();
+  </script>
+</body>
+</html>
