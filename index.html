@@ -14,17 +14,23 @@
   </header>
 
   <main>
-    <div class="slider">
+    <div class="slider" id="slider">
       <img id="dish-img" src="" alt="Dish Image" class="slide-in">
       <h2 id="dish-name"></h2>
       <p id="dish-desc"></p>
       <ul id="dish-ingredients"></ul>
       <p id="dish-price"></p>
+      <button id="order-button" onclick="selectItem()">Order Now</button>
+    </div>
 
-      <div class="nav-buttons">
-        <button onclick="prevDish()">⬅ Previous</button>
-        <button onclick="nextDish()">Next ➡</button>
-      </div>
+    <div id="payment-section" class="hidden">
+      <h2>Payment Method</h2>
+      <form id="payment-form">
+        <input type="text" id="card-number" placeholder="Card Number" required />
+        <input type="text" id="card-expiry" placeholder="MM/YY" required />
+        <input type="text" id="card-cvc" placeholder="CVC" required />
+        <button type="submit">Complete Payment</button>
+      </form>
     </div>
   </main>
 
@@ -121,18 +127,10 @@
         li.textContent = ing;
         ingredientsList.appendChild(li);
       });
-
-      document.getElementById("dish-img").classList.add("slide-in");
     }
 
-    function nextDish() {
-      current = (current + 1) % dishes.length;
-      updateDish();
-    }
-
-    function prevDish() {
-      current = (current - 1 + dishes.length) % dishes.length;
-      updateDish();
+    function selectItem() {
+      document.getElementById("payment-section").classList.remove("hidden");
     }
 
     updateDish();
